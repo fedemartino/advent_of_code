@@ -3,6 +3,7 @@ from puzzle1.solution import run as puzzle1
 from puzzle2.solution import solution_v1, solution_v2
 from puzzle3.solution import run as puzzle3
 from puzzle4.solution import run as puzzle4
+from puzzle5.solution import run as puzzle5
 import re
 
 def puzzle1Solution():
@@ -36,18 +37,17 @@ def puzzle4Solution():
     print(puzzle4(input, ["byr","iyr","eyr","hgt","hcl","ecl","pid"], False))
     print("Part 2 Solution:")
     print(puzzle4(input, ["byr","iyr","eyr","hgt","hcl","ecl","pid"], True))
+
+def puzzle5Solution():
+    print("-------------- Puzzle 5 -----------")
+    input = extractRaw("./puzzle5/input.txt")
+    print("Part 1 Solution:")
+    print(puzzle5(input, ["byr","iyr","eyr","hgt","hcl","ecl","pid"], False))
+    print("Part 2 Solution:")
+    print(puzzle5(input, ["byr","iyr","eyr","hgt","hcl","ecl","pid"], True))
     
 #puzzle1Solution()
 #puzzle2Solution()
 #puzzle3Solution()
-puzzle4Solution()
-#for met in ["a190cm","blu","brn", "gry", "grn", "hzl", "11oth111","ssothas"]:
-#    for i in range(1):
-        #result = re.match("([2][0][0][012])|([1][9][2-9][0-9])", str(i))
-        #result = re.match("[2][0](([1][0-9])|([2][0]))", str(i))
-        #result = re.match("[2][0](([2][0-9])|([3][0]))", str(i))
-#        result = re.match("([1](([5-8][0-9])|([9][0-3]))[c][m])|((([5][9])|([6][0-9])|([7][0-6]))[i][n])", met)
-        #result = re.match("[#]([0-9]|[a-f]){6}", met+str(i))
-        #result = re.match("(^amb$|^blu$|^brn$|^gry$|^grn$|^hzl$|^oth$)", met)
-        
-        #print(met + str(i) + " : " + str(result))
+#puzzle4Solution()
+puzzle5Solution()
