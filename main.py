@@ -3,6 +3,7 @@ from puzzle1.solution import run as puzzle1
 from puzzle2.solution import solution_v1, solution_v2
 from puzzle3.solution import run as puzzle3
 from puzzle4.solution import run as puzzle4
+import re
 
 def puzzle1Solution():
     print("-------------- Puzzle 1 -----------")
@@ -36,7 +37,17 @@ def puzzle4Solution():
     print("Part 2 Solution:")
     #print(puzzle4(input, [[1,1],[3,1],[5,1],[7,1],[1,2]]))
 
-puzzle1Solution()
-puzzle2Solution()
-puzzle3Solution()
+#puzzle1Solution()
+#puzzle2Solution()
+#puzzle3Solution()
 puzzle4Solution()
+#for met in ["a190cm","blu","brn", "gry", "grn", "hzl", "11oth111","ssothas"]:
+#    for i in range(1):
+        #result = re.match("([2][0][0][012])|([1][9][2-9][0-9])", str(i))
+        #result = re.match("[2][0](([1][0-9])|([2][0]))", str(i))
+        #result = re.match("[2][0](([2][0-9])|([3][0]))", str(i))
+#        result = re.match("([1](([5-8][0-9])|([9][0-3]))[c][m])|((([5][9])|([6][0-9])|([7][0-6]))[i][n])", met)
+        #result = re.match("[#]([0-9]|[a-f]){6}", met+str(i))
+        #result = re.match("(^amb$|^blu$|^brn$|^gry$|^grn$|^hzl$|^oth$)", met)
+        
+        #print(met + str(i) + " : " + str(result))
