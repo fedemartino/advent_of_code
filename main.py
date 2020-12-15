@@ -33,10 +33,10 @@ def puzzle4Solution():
     print("-------------- Puzzle 4 -----------")
     input = extractRaw("./puzzle4/input.txt")
     print("Part 1 Solution:")
-    print(puzzle4(input, ["byr","iyr","eyr","hgt","hcl","ecl","pid"]))
+    print(puzzle4(input, ["byr","iyr","eyr","hgt","hcl","ecl","pid"], False))
     print("Part 2 Solution:")
-    #print(puzzle4(input, [[1,1],[3,1],[5,1],[7,1],[1,2]]))
-
+    print(puzzle4(input, ["byr","iyr","eyr","hgt","hcl","ecl","pid"], True))
+    
 #puzzle1Solution()
 #puzzle2Solution()
 #puzzle3Solution()

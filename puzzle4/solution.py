@@ -12,24 +12,25 @@ fieldValidators = {
     "pid" : "[0-9]{9}"
 }
 
-def run(input, mandatoryFields):
+def run(input, mandatoryFields, fieldValidation):
     validPassportCount = 0
     for line in input.split("\n\n"):
-        validPass = isValidPassport(line, mandatoryFields)
+        validPass = isValidPassport(line, mandatoryFields, fieldValidation)
         if (validPass):
             validPassportCount+=1
     return validPassportCount
 
-def isValidPassport(passport, mandatoryFields):
+def isValidPassport(passport, mandatoryFields, fieldValidation):
     hasFields = True
     for field in mandatoryFields:
         fieldIndex = passport.find(field)
         if (fieldIndex!=-1):
-            value = passport[fieldIndex:].split("\n")[0].split(" ")[0].split(":")[1].strip()
-            if (not isValidField(field, value)):
-                return False
-            if (isValidField(field, value)):
-                print("field: " + field + " value : " + value + " " + str(isValidField(field, value)))
+            if (fieldValidation):
+                value = passport[fieldIndex:].split("\n")[0].split(" ")[0].split(":")[1].strip()
+                if (not isValidField(field, value)):
+                    return False
+                #if (isValidField(field, value)):
+                #    print("field: " + field + " value : " + value + " " + str(isValidField(field, value)))
         else:
             return False
     return hasFields
