@@ -4,6 +4,7 @@ from puzzle2.solution import solution_v1, solution_v2
 from puzzle3.solution import run as puzzle3
 from puzzle4.solution import run as puzzle4
 from puzzle5.solution import run as puzzle5
+from puzzle6.solution import run as puzzle6
 import re
 
 def puzzle1Solution():
@@ -46,9 +47,19 @@ def puzzle5Solution():
     print(maxSeat)
     print("Part 2 Solution:")
     print(missingSeat)
+
+def puzzle6Solution():
+    print("-------------- Puzzle 6 -----------")
+    input = extractRaw("./puzzle6/input.txt")
+    anyAnswer, allAnswer = puzzle6(input)
+    print("Part 1 Solution:")
+    print(anyAnswer)
+    print("Part 2 Solution:")
+    print(allAnswer)
     
 #puzzle1Solution()
 #puzzle2Solution()
 #puzzle3Solution()
 #puzzle4Solution()
-puzzle5Solution()
+#puzzle5Solution()
+puzzle6Solution()
