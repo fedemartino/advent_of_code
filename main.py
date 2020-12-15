@@ -40,11 +40,12 @@ def puzzle4Solution():
 
 def puzzle5Solution():
     print("-------------- Puzzle 5 -----------")
-    input = extractRaw("./puzzle5/input.txt")
+    input = extract("./puzzle5/input.txt")
+    maxSeat, missingSeat = puzzle5(input)
     print("Part 1 Solution:")
-    print(puzzle5(input, ["byr","iyr","eyr","hgt","hcl","ecl","pid"], False))
+    print(maxSeat)
     print("Part 2 Solution:")
-    print(puzzle5(input, ["byr","iyr","eyr","hgt","hcl","ecl","pid"], True))
+    print(missingSeat)
     
 #puzzle1Solution()
 #puzzle2Solution()
