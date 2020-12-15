@@ -1,15 +1,13 @@
-##255<answer<264
-##185>answer
 import re
 
 fieldValidators = {
-    "byr" : "([2][0][0][012])|([1][9][2-9][0-9])",
-    "iyr" : "[2][0][1-2][0-9]",
-    "eyr" : "[2][0](([2][0-9])|([3][0]))",
-    "hgt" : "([1](([5-8][0-9])|([9][0-3]))[c][m])|((([5][9])|([6][0-9])|([7][0-6]))[i][n])",
-    "hcl" : "[#]([0-9]|[a-f]){6}",
+    "byr" : "(^200[012]$)|(^19[2-9][0-9]$)",
+    "iyr" : "(^201[0-9]$)|(^2020$)",
+    "eyr" : "(^202[0-9]$)|(^2030$)",
+    "hgt" : "(((1[5-8][0-9])|(19[0-3]))cm)|(((59)|(6[0-9])|(7[0-6]))in)",
+    "hcl" : "^#([0-9]|[a-f]){6}$",
     "ecl" : "(^amb$|^blu$|^brn$|^gry$|^grn$|^hzl$|^oth$)",
-    "pid" : "[0-9]{9}"
+    "pid" : "^[0-9]{9}$"
 }
 
 def run(input, mandatoryFields, fieldValidation):
@@ -29,8 +27,6 @@ def isValidPassport(passport, mandatoryFields, fieldValidation):
                 value = passport[fieldIndex:].split("\n")[0].split(" ")[0].split(":")[1].strip()
                 if (not isValidField(field, value)):
                     return False
-                #if (isValidField(field, value)):
-                #    print("field: " + field + " value : " + value + " " + str(isValidField(field, value)))
         else:
             return False
     return hasFields
