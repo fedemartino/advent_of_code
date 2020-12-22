@@ -1,5 +1,3 @@
-#3397 too low
-
 def run(input):
     groups = input.split("\n\n")
     #print(groups)
