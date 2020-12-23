@@ -61,11 +61,18 @@ def puzzle6Solution():
 def puzzle7Solution():
     print("-------------- Puzzle 7 -----------")
     input = extract("./puzzle7/sample.txt")
-    answer = puzzle7(input, 'shiny gold')
+    answer1, answer2 = puzzle7(input, 'shiny gold')
     print("Part 1 Solution:")
-    print(answer)
+    print(answer1)
     print("Part 2 Solution:")
-    #print(answer)
+    print(answer2)
+
+    input = extract("./puzzle7/sample2.txt")
+    answer1, answer2 = puzzle7(input, 'shiny gold')
+    print("Part 1 Solution:")
+    print(answer1)
+    print("Part 2 Solution:")
+    print(answer2)
     
 #puzzle1Solution()
 #puzzle2Solution()

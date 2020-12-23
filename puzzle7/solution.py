@@ -4,35 +4,33 @@ class Bag:
     def __init__(self, bagName):
         self.bagName = bagName
         self.bagList = {}
-    def __str__(self) -> str:
-        return self.bagName + " -> " + str(self.bagList)
 
     def add(self, bag, bagNumber):
-        self.bagList[bag.bagName] = BagNode(bag, bagNumber)
+        self.bagList[bag.bagName] = bag, bagNumber
 
-class BagNode:
-    def __init__(self, bag, numberBags):
-        self.bag = bag
-        self.numberBags = numberBags
-    def __str__(self) -> str:
-        return str(self.numberBags) +" : "+  str(self.bag.bagName)
-    
+    def find(self, bagNameToFind):
+        #print("Looking inside the " + self.bagName + " bag")
+        result = False
+        for bagName in self.bagList.keys():
+            bagInList, bagQty = self.bagList[bagName]
+            if (bagInList.bagName == bagNameToFind): 
+                result = True
+            result = result or bagInList.find(bagNameToFind)
+        return result
+            
 
 def run(input, bagInput):
-    allBags = buildTree(input)
-    for bag in allBags.keys():
-        #pass
-        print(allBags[bag])
-    return len(allBags)
+    allBags, mainBags = buildTree(input)
+    containedIn = 0
+    for bagName, bag in mainBags.items():
+        if (bag.find(bagInput)):
+            containedIn += 1
+    return containedIn, 0
 
 def buildTree(input):
     allBags = {}
+    mainBags = {}
 
-    #'''record of which bags can be stored inside the key'''
-    #validBagContainers = {}
-    #'''record of which bags can contain the key'''
-    #reverseValidBagContainers = {}
-    
     for rule in input:
         '''Split rules in half with container bags and contained bags'''
         splitRule = rule.split("contain")
@@ -40,11 +38,15 @@ def buildTree(input):
         rightSideOfRule = splitRule[1]
 
         '''Container bag is everything befer the word "bags" on the left side of the rule'''
-        containerBag = Bag(leftSideOfRule[:leftSideOfRule.find(" bags")].strip())
-        allBags[containerBag.bagName] = containerBag
-
-        #print("Container Bag -> "+  str(containerBag))
-        #print(rightSideOfRule)
+        mainBagName = leftSideOfRule[:leftSideOfRule.find(" bags")].strip()
+        if (mainBagName in allBags.keys()):
+            containerBag = allBags[mainBagName]
+        else:
+            containerBag = Bag(mainBagName)
+            allBags[mainBagName] = containerBag
+        
+        if (mainBagName not in mainBags.keys()):
+            mainBags[mainBagName] = containerBag
 
         for bag in rightSideOfRule.split(","):
             shortBag = bag[:bag.find("bag")].strip()
@@ -53,9 +55,11 @@ def buildTree(input):
             if (len(numberPos)):
                 shortBag = shortBag[len(numberPos[0])-1:].strip()
                 nodeNumber = int(numberPos[0].strip())
-            
-            containedBag = Bag(shortBag)
+            if (shortBag in allBags.keys()):
+                containedBag = allBags[shortBag]
+            else:
+                containedBag = Bag(shortBag)
+                allBags[shortBag] = containedBag
             containerBag.add(containedBag, nodeNumber)
-            #print(bag)
-            #print("Contained Bag -> " + str(containedBag) + " " + str(nodeNumber))
-    return allBags
+
+    return allBags, mainBags
