@@ -7,6 +7,7 @@ from puzzle5.solution import run as puzzle5
 from puzzle6.solution import run as puzzle6
 from puzzle7.solution import run as puzzle7
 from puzzle8.solution import run as puzzle8
+from puzzle9.solution import run as puzzle9
 import re
 
 def puzzle1Solution():
@@ -71,7 +72,16 @@ def puzzle7Solution():
 def puzzle8Solution():
     print("-------------- Puzzle 8 -----------")
     input = extract("./puzzle8/input.txt")
-    answer1, answer2 = puzzle8(input, 'shiny gold')
+    answer1, answer2 = puzzle8(input)
+    print("Part 1 Solution:")
+    print(answer1)
+    print("Part 2 Solution:")
+    print(answer2)
+
+def puzzle9Solution():
+    print("-------------- Puzzle 9 -----------")
+    input = extract("./puzzle9/input.txt")
+    answer1, answer2 = puzzle9(input)
     print("Part 1 Solution:")
     print(answer1)
     print("Part 2 Solution:")
@@ -85,8 +95,8 @@ def puzzle8Solution():
 #puzzle5Solution()
 #puzzle6Solution()
 #puzzle7Solution()
-puzzle8Solution()
-#puzzle9Solution()
+#puzzle8Solution()
+puzzle9Solution()
 #puzzle10Solution()
 #puzzl11Solution()
 #puzzle12Solution()
