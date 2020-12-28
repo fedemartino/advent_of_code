@@ -81,7 +81,7 @@ def puzzle8Solution():
 def puzzle9Solution():
     print("-------------- Puzzle 9 -----------")
     input = extract("./puzzle9/input.txt")
-    answer1, answer2 = puzzle9(input)
+    answer1, answer2 = puzzle9(input, 25)
     print("Part 1 Solution:")
     print(answer1)
     print("Part 2 Solution:")

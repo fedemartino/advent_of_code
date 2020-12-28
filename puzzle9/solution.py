@@ -1,58 +1,46 @@
-accInstr = "acc"
-jmpInstr = "jmp"
-nopInstr = "nop"
+import sys
 
-def run(input):
-    part1, end = executeProgram(input)
-    #print("End: " + str(end))
-    oldParam = ""
-    part2 = 0
-    print("start part 2")
-    for i in range(len(input)):
-        instruction = input[i]
-        oldParam = instruction
-        argument, parameter = getInstruction(instruction)
-        if (argument==jmpInstr):
-            input[i] = nopInstr + " " + str(parameter)
-        elif (argument==nopInstr):
-            input[i] = jmpInstr + " " + str(parameter)
-        #print("new input")
-        #print(i)
-        #print(input[i])
-        #print("new program")
-        #print(input)
-        #print(input)
-        acc, end = executeProgram(input)
-        #print(acc)
-        #print(end)
-        if (end):
-            part2 = acc
-            print("END")
+def run(input, preamble):
+    part1, part2 = 0,0
+    for i in range(preamble, len(input)):
+        targetFound = False
+        targetNum = int(input[i])
+        #print(targetNum)
+        for firstNumIndex in range(i-preamble, i-1):
+            firstNumber = int(input[firstNumIndex])
+            for secondNumberIndex in range(firstNumIndex+1, i):
+                secondNumber = int(input[secondNumberIndex])
+                if (targetNum == firstNumber + secondNumber):
+                    targetFound = True
+                    break
+        if (not targetFound):
             break
-        else:
-            input[i] = oldParam
+    part1 = targetNum
+    numList = [int(val) for val in input[0:i-1]]
+    #numListSum = sumList(numList) + numList[0] + numList[len(numList)-1]
     
+    for x in range(len(numList)-1):
+        numListSum = numList[x]
+        for y in range(x+1,len(numList)):
+            numListSum += numList[y]
+            if (numListSum == targetNum):
+                break
+        if (numListSum == targetNum):
+            break
+    max, min = getMaxMin(numList[x:y])
+    part2 = max + min
     return part1, part2
-
-def executeProgram(input):
-    executed =  [False for i in range(len(input))] 
-    accumulator = 0
-    i = 0
-    while(i<len(executed) and not executed[i]):
-        executed[i] = True
-        argument, parameter = getInstruction(input[i])
-        if (argument == nopInstr):
-            i+=1
-        elif (argument == accInstr):
-            accumulator += parameter
-            i+=1
-        elif (argument == jmpInstr):
-            i += parameter
-    return accumulator, i==len(executed)
-
-def getInstruction(instruction):
-    #print(instruction)
-    splitInstruction = instruction.split(" ")
-    argument = splitInstruction[0]
-    parameter = int(splitInstruction[1])
-    return argument, parameter
+def getMaxMin(list):
+    min=2147483647
+    max = 0
+    for x in list:
+        if (x > max):
+            max = x
+        if (x < min):
+            min = x
+    return min, max
+def sumList(list):
+    sum = 0
+    for i in list:
+        sum += i
+    return sum
