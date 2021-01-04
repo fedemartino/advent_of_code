@@ -10,7 +10,7 @@ from puzzle8.solution import run as puzzle8
 from puzzle9.solution import run as puzzle9
 from puzzle10.solution import run as puzzle10
 from puzzle11.solution import run as puzzle11
-#from puzzle12.solution import run as puzzle12
+from puzzle12.solution import run as puzzle12
 #from puzzle13.solution import run as puzzle13
 #from puzzle14.solution import run as puzzle14
 #from puzzle15.solution import run as puzzle15
@@ -124,7 +124,7 @@ def puzzle11Solution():
 def puzzle12Solution():
     print("-------------- Puzzle 12 -----------")
     input = extract("./puzzle12/input.txt")
-    answer1, answer2 = puzzle11(input)
+    answer1, answer2 = puzzle12(input)
     print("Part 1 Solution:")
     print(answer1)
     print("Part 2 Solution:")
@@ -141,8 +141,8 @@ def puzzle12Solution():
 #puzzle8Solution()
 #puzzle9Solution()
 #puzzle10Solution()
-puzzle11Solution()
-#puzzle12Solution()
+#puzzle11Solution()
+puzzle12Solution()
 #puzzle13Solution()
 #puzzle14Solution()
 #puzzle15Solution()
