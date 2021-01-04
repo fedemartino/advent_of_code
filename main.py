@@ -9,6 +9,21 @@ from puzzle7.solution import run as puzzle7
 from puzzle8.solution import run as puzzle8
 from puzzle9.solution import run as puzzle9
 from puzzle10.solution import run as puzzle10
+from puzzle11.solution import run as puzzle11
+#from puzzle12.solution import run as puzzle12
+#from puzzle13.solution import run as puzzle13
+#from puzzle14.solution import run as puzzle14
+#from puzzle15.solution import run as puzzle15
+#from puzzle16.solution import run as puzzle16
+#from puzzle17.solution import run as puzzle17
+#from puzzle18.solution import run as puzzle18
+#from puzzle19.solution import run as puzzle19
+#from puzzle20.solution import run as puzzle20
+#from puzzle21.solution import run as puzzle21
+#from puzzle22.solution import run as puzzle22
+#from puzzle23.solution import run as puzzle23
+#from puzzle24.solution import run as puzzle24
+#from puzzle25.solution import run as puzzle25
 import re
 
 def puzzle1Solution():
@@ -97,6 +112,24 @@ def puzzle10Solution():
     print("Part 2 Solution:")
     print(answer2)
 
+def puzzle11Solution():
+    print("-------------- Puzzle 11 -----------")
+    input = extract("./puzzle11/input.txt")
+    answer1, answer2 = puzzle11(input)
+    print("Part 1 Solution:")
+    print(answer1)
+    print("Part 2 Solution:")
+    print(answer2)
+
+def puzzle12Solution():
+    print("-------------- Puzzle 12 -----------")
+    input = extract("./puzzle12/input.txt")
+    answer1, answer2 = puzzle11(input)
+    print("Part 1 Solution:")
+    print(answer1)
+    print("Part 2 Solution:")
+    print(answer2)
+
 
 #puzzle1Solution()
 #puzzle2Solution()
@@ -107,6 +140,19 @@ def puzzle10Solution():
 #puzzle7Solution()
 #puzzle8Solution()
 #puzzle9Solution()
-puzzle10Solution()
-#puzzl11Solution()
+#puzzle10Solution()
+puzzle11Solution()
 #puzzle12Solution()
+#puzzle13Solution()
+#puzzle14Solution()
+#puzzle15Solution()
+#puzzle16Solution()
+#puzzle17Solution()
+#puzzle18Solution()
+#puzzle19Solution()
+#puzzle20Solution()
+#puzzle21Solution()
+#puzzle22Solution()
+#puzzle23Solution()
+#puzzle24Solution()
+#puzzle25Solution()
