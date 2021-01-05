@@ -24,18 +24,7 @@ def run(instructions):
         else:
             currentPosE, currentPosN = move(direction, ammount, currentPosE, currentPosN)
             wayPointX, wayPointY = move(direction, ammount, wayPointX, wayPointY)
-        #if (direction == "N"):
-        #    currentPosN += ammount
-        #    wayPointY += ammount
-        #elif (direction == "S"):
-        #    currentPosN -= ammount
-        #    wayPointY -= ammount
-        #elif (direction == "E"):
-        #    currentPosE += ammount
-        #    wayPointX += ammount
-        #elif (direction == "W"):
-        #    currentPosE -= ammount
-        #    wayPointX -= ammount
+        
     part1 = abs(currentPosE) + abs(currentPosN)
     part2 = abs(x) + abs(y)
     return part1, part2
