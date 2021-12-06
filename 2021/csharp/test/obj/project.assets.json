@@ -1648,6 +1648,16 @@
         "build": {
           "build/netcoreapp2.1/xunit.runner.visualstudio.props": {}
         }
+      },
+      "AdventOfCode/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/AdventOfCode.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AdventOfCode.dll": {}
+        }
       }
     }
   },
@@ -5611,10 +5621,16 @@
         "xunit.runner.visualstudio.2.4.3.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "AdventOfCode/1.0.0": {
+      "type": "project",
+      "path": "../src/AdventOfCode/AdventOfCode.csproj",
+      "msbuildProject": "../src/AdventOfCode/AdventOfCode.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "AdventOfCode >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 16.7.1",
       "coverlet.collector >= 1.3.0",
       "xunit >= 2.4.1",
@@ -5628,9 +5644,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\repos\\advent_of_code\\2021\\csharp\\test\\test.csproj",
-      "projectName": "test",
-      "projectPath": "C:\\repos\\advent_of_code\\2021\\csharp\\test\\test.csproj",
+      "projectUniqueName": "C:\\repos\\advent_of_code\\2021\\csharp\\test\\AdventOfCode.test.csproj",
+      "projectName": "AdventOfCode.test",
+      "projectPath": "C:\\repos\\advent_of_code\\2021\\csharp\\test\\AdventOfCode.test.csproj",
       "packagesPath": "C:\\Users\\fedem\\.nuget\\packages\\",
       "outputPath": "C:\\repos\\advent_of_code\\2021\\csharp\\test\\obj\\",
       "projectStyle": "PackageReference",
@@ -5652,7 +5668,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\repos\\advent_of_code\\2021\\csharp\\src\\AdventOfCode\\AdventOfCode.csproj": {
+              "projectPath": "C:\\repos\\advent_of_code\\2021\\csharp\\src\\AdventOfCode\\AdventOfCode.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
