@@ -22,11 +22,21 @@ namespace AdventOfCode
         public string[] Solve(string[] input)
         {
             string[] result = new string[] {"",""};
-            result[0] = InternalSolve(input);
-            result[1] = InternalSolve(input);
+            result[0] = InternalSolve1(input);
+            result[1] = InternalSolve2(input);
             return result;
         }
-        private string InternalSolve(string[] input)
+        private string InternalSolve1(string[] input)
+        {
+            foreach (string line in input)
+            {
+                string[] words = line.Split(' ');
+                vector[words[0]] += _directions[words[0]]*int.Parse(words[1]);
+            }
+            return ((vector["forward"] + vector["backwards"]) * (vector["up"] + vector["down"])).ToString();
+
+        }
+        private string InternalSolve2(string[] input)
         {
             foreach (string line in input)
             {
