@@ -4,34 +4,37 @@ namespace AdventOfCode
 {
     public class Day2 : IPuzzle
     {
+        private Dictionary<string, int> _directions = new Dictionary<string, int>()
+        {
+            { "forward", 1 },
+            { "backwards", -1 },
+            { "up", -1 },
+            { "down", 1 }
+        };
+        private Dictionary<string, int> vector = new Dictionary<string, int>()
+        {
+            { "forward", 0 },
+            { "backwards", 0 },
+            { "up", 0 },
+            { "down", 0 }
+        };
+
         public string[] Solve(string[] input)
         {
             string[] result = new string[] {"",""};
-            result[0] = InternalSolve(input, 1).ToString();
-            result[1] = InternalSolve(input, 3).ToString();
+            result[0] = InternalSolve(input);
+            result[1] = InternalSolve(input);
             return result;
         }
-        private string InternalSolve(string[] input, int groupSize)
+        private string InternalSolve(string[] input)
         {
-            int increases = 0;
-            for (int i = 1; i <= input.Length - groupSize; i++)
+            foreach (string line in input)
             {
-                if (GetGroupingValue(input, groupSize, i) > GetGroupingValue(input, groupSize, i-1))
-                {
-                    increases++;
-                }
+                string[] words = line.Split(' ');
+                vector[words[0]] += _directions[words[0]]*int.Parse(words[1]);
             }
-            return increases.ToString();
+            return ((vector["forward"] + vector["backwards"]) * (vector["up"] + vector["down"])).ToString();
 
-        }
-        private int GetGroupingValue(string[] input, int groupSize, int startIndex)
-        {
-            int value = 0;
-            for (int i = startIndex; i < startIndex + groupSize; i++)
-            {
-                value += int.Parse(input[i]);
-            }
-            return value;
         }
         
     }

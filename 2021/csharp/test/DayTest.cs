@@ -11,7 +11,7 @@ namespace test
         [Theory]
         [InlineData(1, 1, 7)]
         [InlineData(1, 2, 5)]
-        [InlineData(2, 1, 7)]
+        [InlineData(2, 1, 150)]
         [InlineData(2, 2, 5)]
         public void Test(int day, int part, int expected)
         {
