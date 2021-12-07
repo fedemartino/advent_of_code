@@ -75,7 +75,6 @@ namespace AdventOfCode
             result[1] = InternalSolve2(input);
             return result;
         }
-        string[][] winningBoard;
         private string InternalSolve1(string[] input)
         {
             BuildBoards(input);
@@ -98,69 +97,11 @@ namespace AdventOfCode
                 nextNumber++;   
             }
             return currentNumber.ToString();
-            /*    currentNumber = numbers[nextNumber];
-                nextNumber++;
-                winner = CheckNumber(currentNumber);
-            }
-            int total = 0;
-            for (int i = 0; i < winningBoard.Length; i++)
-            {
-                for (int j = 0; j < winningBoard[i].Length; j++)
-                {
-                    if (winningBoard[i][j] != "x")
-                    {
-                        total += int.Parse(winningBoard[i][j]);
-                    }
-                }
-            }
-            return (total * int.Parse(currentNumber)).ToString();*/
         }
         private string InternalSolve2(string[] input)
         {
             return "";
         }
-        
-        /*private bool CheckNumber(string number)
-        {
-            bool winner = false;
-            foreach (string[][] board in BoardList)
-            {
-                if (CheckBoard(board, number))
-                {
-                    winner = true;
-                    winningBoard = board;
-                    break;
-                }
-            }
-            return winner;
-        }
-        private bool CheckBoard(string[][] board, string number)
-        {
-            bool winner = false;
-            for (int i = 0; i < board.Length; i++)
-            {
-                for (int j = 0; j < board[i].Length; j++)
-                {
-                    if (board[i][j] == number)
-                    {
-                        board[i][j] = "x";
-                        winner = CheckWinner(board, i,j);
-                    }
-                }
-            }
-            return winner;
-        }
-        private bool CheckWinner(string[][] board, int x, int y)
-        {
-            bool rowWinner = true;
-            bool colWinner = true;
-            for (int i = 0; i < board.Length; i++)
-            {
-                rowWinner = rowWinner && (board[x][i] == "x");
-                colWinner = colWinner && (board[i][y] == "x");
-            }
-            return colWinner || rowWinner;
-        }*/
         private void BuildBoards(string[] input)
         {
             List<string[]> rows = new List<string[]>();
@@ -171,23 +112,7 @@ namespace AdventOfCode
                 {
                     BoardList.Add(new Board(input[last..i]));
                     last = i+1;
-                    /*List<string> rowList = new List<string>();
-                    string rowString = input[i];
-                    while (rowString.Length > 0)
-                    {
-                        string number = rowString[..2];
-                        rowString = rowString.Length > 2 ? rowString.Substring(3) : "";
-                        rowList.Add(number.TrimStart());
-                    }
-                    string[] boardLine = rowList.ToArray();
-                    rows.Add(boardLine);
-                    */
                 }
-                /*else 
-                {
-                    this.BoardList.Add(rows.ToArray());
-                    rows = new List<string[]>();
-                }*/
             }
             BoardList.Add(new Board(input[last..]));
         }
