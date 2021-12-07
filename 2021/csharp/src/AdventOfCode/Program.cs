@@ -7,7 +7,7 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            for (int i = 1; i <= 2; i++)
+            for (int i = 4; i <= 4; i++)
             {
                 IPuzzle puzzle = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(string.Format("AdventOfCode.Day{0}", i)) as IPuzzle;
                 string[] result = puzzle.Solve(InputReader.ReadInput(Path.Combine("../../..",string.Format("input{0}.txt", i))));
