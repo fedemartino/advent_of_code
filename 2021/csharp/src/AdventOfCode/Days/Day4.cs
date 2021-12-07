@@ -72,6 +72,7 @@ namespace AdventOfCode
         {
             string[] result = new string[] {"",""};
             result[0] = InternalSolve1(input);
+            BoardList = new List<Board>();
             result[1] = InternalSolve2(input);
             return result;
         }
@@ -100,7 +101,45 @@ namespace AdventOfCode
         }
         private string InternalSolve2(string[] input)
         {
-            return "";
+            BuildBoards(input);
+            string[] numbers = input[0].Split(',');
+
+            bool winner = false;
+            int nextNumber = 0;
+            int currentNumber = 0;
+            List<Board> boardsToRemove = new List<Board>();
+            while (BoardList.Count > 1)
+            {
+                boardsToRemove = new List<Board>();
+                foreach (Board b in BoardList)
+                {
+                    currentNumber = int.Parse(numbers[nextNumber]);
+                    b.AddNumber(currentNumber);
+                    if (b.IsWinner)
+                    {
+                        boardsToRemove.Add(b);
+                    }
+                }
+                foreach (Board b in boardsToRemove)
+                {
+                    BoardList.Remove(b);
+                }
+                nextNumber++;   
+            }
+            while (!winner)
+            {
+                foreach (Board b in BoardList)
+                {
+                    currentNumber = int.Parse(numbers[nextNumber]);
+                    b.AddNumber(currentNumber);
+                    if (b.IsWinner)
+                    {
+                        return (b.GetTotal() * currentNumber).ToString();
+                    }
+                }
+                nextNumber++;
+            }
+            return currentNumber.ToString();
         }
         private void BuildBoards(string[] input)
         {
