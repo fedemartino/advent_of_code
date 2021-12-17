@@ -19,14 +19,16 @@ namespace test
         [InlineData(4, 2, 1924)]
         [InlineData(5, 1, 5)]
         [InlineData(5, 2, 12)]
-        public void Test(int day, int part, int expected)
+        [InlineData(6, 1, 5934)]
+        [InlineData(6, 2, 26984457539)]
+        public void Test(int day, int part, Int64 expected)
         {
             Assembly assem = typeof(IPuzzle).Assembly;
             string dayString = day.ToString("00");
             
             IPuzzle puzzle = assem.CreateInstance(string.Format("AdventOfCode.Day{0}", day)) as IPuzzle;
             string[] result = puzzle.Solve(InputReader.ReadInput(Path.Combine("../../..",string.Format($"input{dayString}_{part}.txt"))));
-            Assert.Equal(expected, int.Parse(result[part-1]));  
+            Assert.Equal(expected, Int64.Parse(result[part-1]));  
         }
     }
 }
