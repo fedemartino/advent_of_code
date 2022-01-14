@@ -7,10 +7,17 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            for (int i = 6; i <= 6; i++)
+            bool debugTests = false;
+            //debugTests = true;
+            for (int i = 8; i <= 8; i++)
             {
                 IPuzzle puzzle = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(string.Format("AdventOfCode.Day{0}", i)) as IPuzzle;
-                string[] result = puzzle.Solve(InputReader.ReadInput(Path.Combine("../../..",string.Format("input{0}.txt", i))));
+                string[] puzzleInput = InputReader.ReadInput(Path.Combine("../../..",string.Format("input{0}.txt", i)));       
+                if (debugTests)
+                {
+                    puzzleInput = InputReader.ReadInput(Path.Combine("../../test",string.Format("input{0}_1.txt", i.ToString("00"))));
+                }
+                string[] result = puzzle.Solve(puzzleInput);
                 Console.WriteLine(string.Format("Day {0} result:", i));
                 Console.WriteLine(string.Format("Part 1: {0}", result[0]));
                 Console.WriteLine(string.Format("Part 2: {0}", result[1]));
