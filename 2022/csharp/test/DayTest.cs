@@ -10,6 +10,8 @@ namespace test
         
         [Theory]
         [InlineData(1, 1, 24000)]
+        [InlineData(1, 2, 45000)]
+        [InlineData(2, 1, 15)]
         public void Test(int day, int part, Int64 expected)
         {
             Assembly assem = typeof(IPuzzle).Assembly;

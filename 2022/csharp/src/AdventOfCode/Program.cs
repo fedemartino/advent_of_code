@@ -8,15 +8,16 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             bool debugTests = false;
+            string path = "../../../inputs";
             //debugTests = true;
-            for (int i = 8; i <= 8; i++)
+            for (int i = 1; i <= 1; i++)
             {
                 IPuzzle puzzle = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(string.Format("AdventOfCode.Day{0}", i)) as IPuzzle;
-                string[] puzzleInput = InputReader.ReadInput(Path.Combine("./inputs",string.Format("input{0}.txt", i.ToString("00"))));       
                 if (debugTests)
                 {
-                    puzzleInput = InputReader.ReadInput(Path.Combine("./inputs.test",string.Format("input{0}.txt", i.ToString("00"))));
+                    path = "../../../inputs.test";
                 }
+                string[] puzzleInput = InputReader.ReadInput(Path.Combine(path,string.Format("input{0}.txt", i.ToString("00")))); 
                 string[] result = puzzle.Solve(puzzleInput);
                 Console.WriteLine(string.Format("Day {0} result:", i));
                 Console.WriteLine(string.Format("Part 1: {0}", result[0]));
