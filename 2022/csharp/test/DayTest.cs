@@ -13,6 +13,9 @@ namespace test
         [InlineData(1, 2, 45000)]
         [InlineData(2, 1, 15)]
         [InlineData(2, 2, 12)]
+        [InlineData(3, 1, 157)]
+        [InlineData(3, 2, 70)]
+        [InlineData(4, 1, 2)]
         public void Test(int day, int part, Int64 expected)
         {
             Assembly assem = typeof(IPuzzle).Assembly;
