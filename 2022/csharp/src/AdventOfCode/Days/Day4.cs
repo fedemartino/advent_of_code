@@ -6,7 +6,10 @@ namespace AdventOfCode
     {
         protected override string InternalSolve1(string[] input)
         {
-            return "";
+            foreach (string pair in input)
+            {
+                var parArray = pair.Split(",");
+            }
         }
         protected override string InternalSolve2(string[] input)
         {
