@@ -7,10 +7,10 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            bool debugTests = false;
+            bool debugTests = true;
             string path = "../../../inputs";
             //debugTests = true;
-            for (int i = 4; i <= 4; i++)
+            for (int i = 5; i <= 5; i++)
             {
                 IPuzzle puzzle = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(string.Format("AdventOfCode.Day{0}", i)) as IPuzzle;
                 if (debugTests)
