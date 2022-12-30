@@ -28,7 +28,16 @@ namespace AdventOfCode
         }
         protected override string InternalSolve2(string[] input)
         {
-            return "";
+            int currentBest = 70000000;
+            int spaceRequiered = 30000000 - (70000000-root.Size);
+            foreach (Directory d in allDirectories.Values)
+            {
+                if (d.Size <= currentBest && d.Size >= spaceRequiered)
+                {
+                    currentBest=d.Size;
+                }
+            }
+            return currentBest.ToString();
         }
         private void ComputeSizes(Directory dir)
         {
