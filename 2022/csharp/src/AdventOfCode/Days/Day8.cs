@@ -44,7 +44,115 @@ namespace AdventOfCode
         
         protected override string InternalSolve2(string[] input)
         {
-            return "";
+            int highestScenicScore = 0;
+
+            for (int row = 0; row < input.Length;row++)
+            {
+                for (int col = 0; col< input[row].Length;col++)
+                {
+                    var score = ScenicScore(input, row, col);
+                    if (score > highestScenicScore)
+                    {
+                        highestScenicScore = score;
+                    }
+                } 
+            } 
+            return highestScenicScore.ToString();
+        }
+
+        private int ScenicScore(string[] grid, int row, int col)
+        {
+            int total = 1;
+            //int temp = 0;
+            //int i = row-1;
+
+            var vectors = new (int, int)[]{
+                (0,-1),
+                (0,1),
+                (-1,0),
+                (1,0)
+            };
+            foreach (var v in vectors)
+            {
+                int temp = 1;
+                int r = row + v.Item1;
+                int c = col + v.Item2;
+                while (r+v.Item1>=0 && c+v.Item2 >= 0 && r+v.Item1 < grid.Length && c+v.Item2 < grid[r].Length)
+                {
+                    if (grid[r][c]<=grid[r+v.Item1][c+v.Item2])
+                    {
+                        temp++;
+                        r += v.Item1;
+                        c += v.Item2;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                total = total*temp;
+            }
+            /* while (i >= 0)
+            {
+                if (grid[i][col]<grid[i+1][col])
+                {
+                    temp++;
+                    i--;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            total = total * temp;
+            temp = 0;
+            i = row+1;
+            while (i < grid.Length)
+            {
+                if (grid[i][col]<grid[i-1][col])
+                {
+                    temp++;
+                    i++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            
+            total = total * temp;
+            temp = 0;
+            i = col-1;
+            while (i >= 0)
+            {
+                if (grid[row][i]<grid[row][i+1])
+                {
+                    temp++;
+                    i--;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            total = total * temp;
+            temp = 0;
+            i = col+1;
+            while (i < grid[row].Length)
+            {
+                if (grid[row][i]<grid[row][i-1])
+                {
+                    temp++;
+                    i++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            total = total * temp; */
+            return total;
         }
     }
 }
