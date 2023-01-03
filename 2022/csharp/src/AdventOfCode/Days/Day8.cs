@@ -63,9 +63,6 @@ namespace AdventOfCode
         private int ScenicScore(string[] grid, int row, int col)
         {
             int total = 1;
-            //int temp = 0;
-            //int i = row-1;
-
             var vectors = new (int, int)[]{
                 (0,-1),
                 (0,1),
@@ -92,66 +89,7 @@ namespace AdventOfCode
                 }
                 total = total*temp;
             }
-            /* while (i >= 0)
-            {
-                if (grid[i][col]<grid[i+1][col])
-                {
-                    temp++;
-                    i--;
-                }
-                else
-                {
-                    break;
-                }
-            }
-            total = total * temp;
-            temp = 0;
-            i = row+1;
-            while (i < grid.Length)
-            {
-                if (grid[i][col]<grid[i-1][col])
-                {
-                    temp++;
-                    i++;
-                }
-                else
-                {
-                    break;
-                }
-            }
             
-            total = total * temp;
-            temp = 0;
-            i = col-1;
-            while (i >= 0)
-            {
-                if (grid[row][i]<grid[row][i+1])
-                {
-                    temp++;
-                    i--;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            total = total * temp;
-            temp = 0;
-            i = col+1;
-            while (i < grid[row].Length)
-            {
-                if (grid[row][i]<grid[row][i-1])
-                {
-                    temp++;
-                    i++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-            total = total * temp; */
             return total;
         }
     }
