@@ -46,9 +46,9 @@ namespace AdventOfCode
         {
             int highestScenicScore = 0;
 
-            for (int row = 0; row < input.Length;row++)
+            for (int row = 1; row < input.Length-1;row++)
             {
-                for (int col = 0; col< input[row].Length;col++)
+                for (int col = 1; col< input[row].Length-1;col++)
                 {
                     var score = ScenicScore(input, row, col);
                     if (score > highestScenicScore)
@@ -74,18 +74,12 @@ namespace AdventOfCode
                 int temp = 1;
                 int r = row + v.Item1;
                 int c = col + v.Item2;
-                while (r+v.Item1>=0 && c+v.Item2 >= 0 && r+v.Item1 < grid.Length && c+v.Item2 < grid[r].Length)
+                while (r>0 && c > 0 && r < grid.Length-1 && c < grid[r].Length-1 && grid[r][c]< grid[row][col])
                 {
-                    if (grid[r][c]<=grid[r+v.Item1][c+v.Item2])
-                    {
-                        temp++;
-                        r += v.Item1;
-                        c += v.Item2;
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    temp++;
+                    r += v.Item1;
+                    c += v.Item2;
+                    
                 }
                 total = total*temp;
             }
