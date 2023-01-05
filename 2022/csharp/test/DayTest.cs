@@ -25,6 +25,7 @@ namespace test
         [InlineData(7, 2, "24933642")]
         [InlineData(8, 1, "21")]
         [InlineData(8, 2, "1")]
+        [InlineData(9, 1, "13")]
         public void Test(int day, int part, string expected)
         {
             Assembly assem = typeof(IPuzzle).Assembly;
