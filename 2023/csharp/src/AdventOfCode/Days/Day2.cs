@@ -1,74 +1,91 @@
+using System;
 using System.Collections.Generic;
+using System.Security;
+using System.Threading.Tasks;
 
 namespace AdventOfCode
 {
     public class Day2 : BasicPuzzle
     {
-        //A, X = Rock
-        //B, Y = Paper
-        //C, Z = Scissors
-        protected Dictionary<string, int> values = new Dictionary<string, int>() 
-        {
-            {"A", 0},
-            {"B", 1},
-            {"C", 2},
-            {"X", 0},
-            {"Y", 1},
-            {"Z", 2}
-        };
+        
         protected override string InternalSolve1(string[] input)
         {
-            int totalScore = 0;
-            foreach (string play in input)
+            var totalColors = new Dictionary<string, int>()
             {
-                string[] playCombo = play.Split(' ');
-                string myPlay = playCombo[1];
-                string elfPlay = playCombo[0];
-                int elfValue = values[elfPlay];
-                int myValue = values[myPlay];
-                
-                if (elfValue == myValue) //draw
+                {"red", 12},
+                {"green", 13},
+                {"blue", 14}
+            };
+            int idSum = 0;
+            foreach (string line in input)
+            {
+                var games = line.Split(':');
+                var gameNumber = Convert.ToInt32(games[0].Split(' ')[1]);
+                //Console.WriteLine($"Game number {gameNumber}");
+                var gameplays = games[1].Split(';');
+                bool validGame = true;
+                foreach (var gameplay in gameplays)
                 {
-                    totalScore += myValue + 3;
+                    //Console.WriteLine($"New Play");
+                    var colorCombinations = gameplay.Split(',');
+                    foreach (var colorCombination in colorCombinations)
+                    {
+                        //Console.WriteLine($"Color combination:{colorCombination.Trim()}");
+                        var color = colorCombination.Trim().Split(' ')[1];
+                        var colorNumber = Convert.ToInt32(colorCombination.Trim().Split(' ')[0]);
+                        validGame = validGame && totalColors[color] >= colorNumber;
+                    }
                 }
-                else if ((myValue+1)%3==elfValue) //I loose because my value + 1 mod 3 equals the elf's choice. The choice above looses to the one below
+                if (validGame)
                 {
-                    totalScore += myValue;
+                    //Console.WriteLine($"Game {gameNumber} is Valid");
+                    idSum += gameNumber;
                 }
-                else //I win
-                {
-                    totalScore += myValue + 6;
-                }
-                totalScore += 1;
             }
-            return totalScore.ToString();
+            return idSum.ToString();
         }
         protected override string InternalSolve2(string[] input)
         {
-            int totalScore = 0;
-            foreach (string play in input)
+            
+            int powerSum = 0;
+            foreach (string line in input)
             {
-                string[] playCombo = play.Split(' ');
-                string myPlay = playCombo[1];
-                string elfPlay = playCombo[0];
-                int elfValue = values[elfPlay];
+                int gamePower = 1;
+                var games = line.Split(':');
+                var gameNumber = Convert.ToInt32(games[0].Split(' ')[1]);
+                //Console.WriteLine($"Game number {gameNumber}");
+                var gameplays = games[1].Split(';');
                 
-                if(myPlay == "X") //loose
+                var totalColors = new Dictionary<string, int>()
                 {
-                    totalScore += (((elfValue-1) % 3) + 3) % 3;
-                }
-                else if (myPlay == "Y") //draw
+                    {"red", 0},
+                    {"green", 0},
+                    {"blue", 0}
+                };
+                foreach (var gameplay in gameplays)
                 {
-                    totalScore += elfValue + 3;
+                    //Console.WriteLine($"New Play");
+                    var colorCombinations = gameplay.Split(',');
+                    foreach (var colorCombination in colorCombinations)
+                    {
+                        //Console.WriteLine($"Color combination:{colorCombination.Trim()}");
+                        var color = colorCombination.Trim().Split(' ')[1];
+                        var colorNumber = Convert.ToInt32(colorCombination.Trim().Split(' ')[0]);
+                        if (totalColors[color] < colorNumber)
+                        {
+                            totalColors[color] = colorNumber;
+                        }
+                    }
                 }
-                else //win
+                foreach (var color in totalColors.Keys)
                 {
-                    totalScore += (elfValue+1)%3 + 6;
+                    //Console.WriteLine($"Color {color} has {totalColors[color]}");
+                    gamePower = gamePower*totalColors[color];
                 }
-                
-                totalScore += 1;
+                //Console.WriteLine($"Game power: {gamePower.ToString()}");
+                powerSum += gamePower;
             }
-            return totalScore.ToString();
+            return powerSum.ToString();
         }
     }
 }
