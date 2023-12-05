@@ -12,7 +12,7 @@ namespace AdventOfCode
             //debugTests = true;
             string secondaryinput = "_2";
             secondaryinput = "";
-            for (int i = 2; i <= 2; i++)
+            for (int i = 3; i <= 3; i++)
             {
                 IPuzzle puzzle = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(string.Format("AdventOfCode.Day{0}", i)) as IPuzzle;
                 if (debugTests)
