@@ -15,15 +15,13 @@ namespace AdventOfCode
             {
                 bool hasAdjacentSymbol = false;
                 var numberString = "0";
-                //Console.WriteLine("Row: " + i);
-                //Console.WriteLine(matrix[i].Length);
                 for (int j = 1; j < matrix[i].Length-1; j++)
                 {
                     if (char.IsNumber(matrix[i][j]))
                     {
                         numberString += matrix[i][j];
                         hasAdjacentSymbol = hasAdjacentSymbol || SpotHasAdjacentSymbol(matrix, i, j);
-                        //Console.WriteLine($"New Number string: {numberString}");
+                        
                     }
                     else 
                     {
@@ -34,8 +32,8 @@ namespace AdventOfCode
                         var number = Convert.ToInt32(numberString);
                         if (hasAdjacentSymbol )//&& !partNumberDict.ContainsKey(number))
                         {
-                            if (numberString != "0")
-                                Console.WriteLine($"Number string: {numberString}");
+                            //if (numberString != "0")
+                            //    Console.WriteLine($"Number string: {numberString}");
                             total += Convert.ToInt32(numberString);
                             //partNumberDict.Add(number, 1);
                         }
@@ -46,8 +44,8 @@ namespace AdventOfCode
                 }
                 if (hasAdjacentSymbol )//&& !partNumberDict.ContainsKey(number))
                 {
-                    if (numberString != "0")
-                        Console.WriteLine($"Number string: {numberString}");
+                    //if (numberString != "0")
+                    //    Console.WriteLine($"Number string: {numberString}");
                     total += Convert.ToInt32(numberString);
                     //partNumberDict.Add(number, 1);
                 }
@@ -83,9 +81,76 @@ namespace AdventOfCode
 
         protected override string InternalSolve2(string[] input)
         {
-            
-            return "".ToString();
+            var gearRatio = 0;
+            var matrix = GetMatrix(input);
+            for (int i = 1; i < matrix.Length-1; i++)
+            {
+                for (int j = 1; j < matrix[i].Length-1; j++)
+                {
+                    if (matrix[i][j] == '*')
+                    {
+                        var gearRatioPos = GetGearRatio(matrix, i, j);
+                        //Console.WriteLine($"Gear ratio: {gearRatioPos}");
+                        gearRatio += gearRatioPos;
+                    }
+                }
+            }
+            return gearRatio.ToString();
         }
+
+        private int GetGearRatio(char[][] matrix, int i, int j)
+        {
+            var ratio = 0;
+            List<(int,int)> gearSpots = new List<(int,int)>();
+            for (int k = i-1; k <= i+1; k++)
+            {
+                bool numberFound = false;
+                for (int l = j-1; l <= j+1; l++)
+                {
+                    if (char.IsNumber(matrix[k][l]))
+                    {
+                        numberFound = true;
+                    }
+                    else if (!char.IsNumber(matrix[k][l]) && numberFound)
+                    {
+                        gearSpots.Add((k,l-1));
+                        numberFound = false;
+                    }
+                }
+                if (numberFound)
+                {
+                    gearSpots.Add((k,j+1));
+                }
+            }
+            if (gearSpots.Count == 2)
+            {
+                ratio = GetNumber(matrix, gearSpots[0].Item1, gearSpots[0].Item2) * GetNumber(matrix, gearSpots[1].Item1, gearSpots[1].Item2);
+            }
+            Console.WriteLine($"Gear ratio found for i:{i}, j:{j} = {ratio}");
+            return ratio;
+        }
+
+        private int GetNumber(char[][] matrix, int item1, int item2)
+        {
+            
+            var i = item1;
+            var j = item2;
+            var numberString = matrix[i][j].ToString();
+            while (char.IsNumber(matrix[i][j+1]))
+            {
+                numberString += matrix[i][j+1];
+                j++;
+            }
+            i = item1;
+            j = item2;
+            while (char.IsNumber(matrix[i][j-1]))
+            {
+                numberString = matrix[i][j-1] + numberString;
+                j--;
+            }
+            return Convert.ToInt32(numberString);
+        }
+
         private char[][] GetMatrix(string[] input)
         {
             var matrix = new char[input.Length+2][];
