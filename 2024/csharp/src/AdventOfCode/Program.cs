@@ -8,11 +8,18 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             bool debugTests = false;
+            bool singleDay = true;
             string path = "../../../inputs";
-            debugTests = true;
+            //debugTests = true;
             string secondaryinput = "_2";
             secondaryinput = "";
-            for (int i = 5; i <= 5; i++)
+            var firstDay = 1;
+            var lastDay = 1;
+            if (singleDay)
+            {
+                firstDay = lastDay;
+            }
+            for (int i = firstDay; i <= lastDay; i++)
             {
                 IPuzzle puzzle = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(string.Format("AdventOfCode.Day{0}", i)) as IPuzzle;
                 if (debugTests)

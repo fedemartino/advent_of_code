@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace AdventOfCode
 {
@@ -6,50 +9,60 @@ namespace AdventOfCode
     {
         protected override string InternalSolve1(string[] input)
         {
-            int totalOverlap = 0;
-            foreach (string pair in input)
+            var totalPoints = 0;
+            foreach (var card in input)
             {
-                var parArray = pair.Split(",");
-                var firstPair = GetPairStartEnd(parArray[0]);
-                var secondPair = GetPairStartEnd(parArray[1]);
-                if (FullOverlap(firstPair, secondPair))
-                {
-                    totalOverlap++;
-                }
+                var cardNumber = card.Split(':')[0];
+                var cardPlays = card.Split(':')[1];
+                var winningNumbers = cardPlays.Split('|')[0].Trim().Split(' ');
+                var playerNumbers = cardPlays.Split('|')[1].Trim().Split(' ');
+
+                totalPoints += GetPoints(winningNumbers, playerNumbers);
             }
-            return totalOverlap.ToString();
+            return totalPoints.ToString();
         }
         protected override string InternalSolve2(string[] input)
         {
-            int totalOverlap = 0;
-            foreach (string pair in input)
+            var cardInstances = new int[input.Length];
+            for(int i = 0; i < input.Length; i++)
             {
-                var parArray = pair.Split(",");
-                var firstPair = GetPairStartEnd(parArray[0]);
-                var secondPair = GetPairStartEnd(parArray[1]);
-                if (Overlap(firstPair, secondPair))
+                cardInstances[i] = 1;
+            }
+            var totalPoints = 0;
+            for(int i = 0; i < input.Length; i++)
+            {
+                var card = input[i];
+                var cardNumber = card.Split(':')[0];
+                var cardPlays = card.Split(':')[1];
+                var winningNumbers = cardPlays.Split('|')[0].Trim().Split(' ').Where(c=> c != "");
+                var playerNumbers = cardPlays.Split('|')[1].Trim().Split(' ').Where(c=> c != "");
+
+                var wins = GetNumberOfWins(winningNumbers, playerNumbers);
+                for (int j = i+1; j <= Math.Min(i+wins, input.Length-1); j++)
                 {
-                    totalOverlap++;
+                    cardInstances[j] += cardInstances[i];
                 }
             }
-            return totalOverlap.ToString();;
+            return cardInstances.Sum().ToString();
         }
-        private (int, int) GetPairStartEnd(string pair)
+
+        private int GetNumberOfWins(IEnumerable<string> winningNumbers, IEnumerable<string> playerNumbers)
         {
-            string[] startEnd = pair.Split("-");
-            return (int.Parse(startEnd[0]), int.Parse(startEnd[1]));
+            var numberOfWins = (from p in playerNumbers.Where(c=> c != "")
+                               where winningNumbers.Where(c=> c != "").Contains(p)
+                               select p).Count();
+            return numberOfWins;
         }
-        private bool FullOverlap((int, int) firstPair, (int, int) secondPair)
+
+        private int GetPoints(string[] winningNumbers, string[] playerNumbers)
         {
-            return (firstPair.Item1 <= secondPair.Item1 && firstPair.Item2 >= secondPair.Item2) || 
-                    (secondPair.Item1<= firstPair.Item1 && secondPair.Item2 >= firstPair.Item2);
+            var numberOfWins = GetNumberOfWins(winningNumbers.Where(c=> c != ""), playerNumbers.Where(c=> c != ""));
+            /*(from p in playerNumbers.Where(c=> c != "")
+                               where winningNumbers.Where(c=> c != "").Contains(p)
+                               select p).Count();*/
+            var points = Math.Pow(2,numberOfWins-1);
+            return (int)points;
         }
-        private bool Overlap((int, int) firstPair, (int, int) secondPair)
-        {
-            return (firstPair.Item1 >= secondPair.Item1 && firstPair.Item1 <= secondPair.Item2) || 
-                    (firstPair.Item2 >= secondPair.Item1 && firstPair.Item2 <= secondPair.Item2) ||
-                    (secondPair.Item1 >= firstPair.Item1 && secondPair.Item1 <= firstPair.Item2) || 
-                    (secondPair.Item2 >= firstPair.Item1 && secondPair.Item2 <= firstPair.Item2);
-        }
+        
     }
 }
